@@ -7,13 +7,17 @@ module.exports = {
   messages: {
     get: function (req, res) {
     // a function which handles a get request for all messages
-      models[req.url.slice(1)].get(req.body, function(err, data){
+      url = req.url.slice(1,req.url.length-1);
+      // console.log(url)
+      models[url].get(req.body, function(err, data){
         res.end(data);
       });
     },
     post: function (req, res) {
     // a function which handles posting a message to the database
-      models[req.url.slice(1)].post(req.body);
+      url = req.url.slice(1,req.url.length-1);
+      // console.log(req.body)
+      models[url].post(req.body);
       res.end();
     }
   },
@@ -24,7 +28,9 @@ module.exports = {
 
     },
     post: function (req, res) {
-      models[req.url.slice(1)].post(req.body);
+      url = req.url.slice(1,req.url.length-1);
+
+      models[url].post(req.body);
       res.end();
     }
   }

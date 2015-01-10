@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- dependencies -->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+    <!-- your scripts -->
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>chatter<em>box</em></h1>
+      <!-- <div class="spinner"><img src="images/spiffygif_46x46.gif"></div> -->
+      <form action="#" id="send" method="post">
+        <input type="text" name="message" id="message"/>
+        <input type="submit" name="submit" class="submit"/>
+      </form>
+    </div>
+    <div id="chats"></div>
+    <script>
+      $(function() {
+        // Backbone-based app initialization
+        var messages = new Messages();
+        messages.loadMsgs();
+        var formView = new FormView({el: $('#main'), collection: messages})
+        var messagesView = new MessagesView({el: $('#chats'), collection: messages});
+        setInterval( messages.loadMsgs.bind(messages), 1000 );
+      });
+    </script>
+  </body>
+</html>

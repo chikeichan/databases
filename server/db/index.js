@@ -65,17 +65,18 @@ module.exports.selectMessage = function(query,cb){
   });
 }
 
-/////
-
 module.exports.insertMessage = function(query){
-  var username;
+  var username = query.username || 'null';
+  console.log(username);
   var ctx = this;
   var roomname = query.roomname;
-  this.selectUser(query.username, function(err, d){
-    if(!err){
+  this.selectUser(username, function(error, d){
+    console.log(error)
+    if(!error){
       username = d[0].user_id;
       var message = query.message;
       var insertString = "INSERT INTO messages ( message, username, roomname ) values ('"+message+"','"+username+"','"+roomname+"')";
+        // console.log(insertString);
       connection.query(insertString,function(err,results){
         if(err){
           console.log(err);
@@ -83,6 +84,8 @@ module.exports.insertMessage = function(query){
           console.log('done posting message')
         }
       })
+    } else {
+      ctx.insertUser('null');
     }
   })
 }
