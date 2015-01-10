@@ -10,11 +10,13 @@ module.exports = {
       url = req.url.slice(1,req.url.length-1);
       // console.log(url)
       models[url].get(req.body, function(err, data){
+        // console.log(data[0].user_ids[0].dataValues)
         console.log(data)
-        if(Object.keys(JSON.parse(data)).length === 0){
+        if(data.length === 0){
           res.end();
+        } else {
+          res.end(JSON.stringify(data));
         }
-        res.end(data);
       });
     },
     post: function (req, res) {

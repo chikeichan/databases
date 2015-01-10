@@ -28,7 +28,7 @@ app.use(express.static(__dirname + "/../client"));
 app.post('/classes/messages',function(req,res){
   // req.body.objectId = messaesDB.length+1;
   // console.log(req.body);
-  console.log('lkjashdflkjashdflkhasldfhgla');
+  // console.log('lkjashdflkjashdflkhasldfhgla');
 });
 
 app.get('/classes/:room',function(req,res){
