@@ -6,6 +6,7 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (query,cb) {
+      // console.log(query)
       db.selectMessage(query,cb)
     }, // a function which produces all the messages
     post: function (data) {

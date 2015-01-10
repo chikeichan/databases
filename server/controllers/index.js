@@ -10,6 +10,10 @@ module.exports = {
       url = req.url.slice(1,req.url.length-1);
       // console.log(url)
       models[url].get(req.body, function(err, data){
+        console.log(data)
+        if(Object.keys(JSON.parse(data)).length === 0){
+          res.end();
+        }
         res.end(data);
       });
     },

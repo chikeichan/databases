@@ -45,10 +45,11 @@ module.exports.insertUser = function(query){
 //////
 
 module.exports.selectMessage = function(query,cb){
-  var queryString = 'SELECT * FROM messages';
+  var queryString = 'SELECT * FROM messages JOIN user_id on messages.username=user_id.user_id';
   if(Object.keys(query).length > 0){
     queryString = queryString + ' WHERE username = "' + query + '"';
   }
+  var ctx = this;
   connection.query(queryString,function(err,results){
     // console.log(queryString, 'query')
     // console.log(results, 'from DB')
@@ -56,9 +57,11 @@ module.exports.selectMessage = function(query,cb){
       console.log(err);
     } else {
       if(results.length === 0){
+        // console.log(query)
         cb(true, query);
       } else {
         // console.log(results);
+        // ctx.selectUser(resulsts)
         cb(false, JSON.stringify(results));
       }
     }
