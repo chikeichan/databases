@@ -1,3 +1,4 @@
+DROP DATABASE chat;
 CREATE DATABASE chat;
 
 USE chat;
@@ -8,18 +9,9 @@ CREATE TABLE messages (
   `username` INTEGER(20) NULL DEFAULT NULL,
   `message` VARCHAR(140) NULL DEFAULT NULL,
   `created_At` TIMESTAMP NULL DEFAULT NULL,
-  `room` INTEGER NULL DEFAULT NULL,
+  `roomname` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`objectId`)
 ) COMMENT 'chatterbot';
-
-DROP TABLE IF EXISTS `rooms`;
-
-CREATE TABLE `rooms` (
-  `room_id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `roomname` VARCHAR(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`room_id`)
-);
-
 
 DROP TABLE IF EXISTS `user_id`;
 
@@ -30,4 +22,3 @@ CREATE TABLE `user_id` (
 );
 
 ALTER TABLE `messages` ADD FOREIGN KEY (username) REFERENCES `user_id` (`user_id`);
-ALTER TABLE `messages` ADD FOREIGN KEY (room) REFERENCES `rooms` (`room_id`);
